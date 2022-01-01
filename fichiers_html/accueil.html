@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">MARQUE</th>
+            <th scope="col">TITRE</th>
+            <th scope="col">PRIX</th>
+            <th scope="col">VILLE</th>
+            <th scope="col">DATE</th>
+            <th scope="col">IMAGE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Contenu du tableau -->
+      </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    function getProduits() {
+        $.getJSON("{% url 'webscraper:getDonnesFromBD' %}", (response) => {
+            $(".table > tbody").empty()
+            response.forEach((element) => {
+                $(".table > tbody").append(`
+                    <tr>
+                        <td>${element.pk}</td>
+                        <td>${element.fields.marque}</td>
+                        <td>${element.fields.titre}</td>
+                        <td>${element.fields.prix}</td>
+                        <td>${element.fields.ville}</td>
+                        <td>${element.fields.date_pub}</td>
+                        <td><img style="width: 20%" src="https://www.marocannonces.com${element.fields.image}" alt=""></td>
+                    </tr>
+                `);
+            });
+        })
+    }
+    getProduits();
+    setInterval(()=>{
+        getProduits();
+    }, 300000);
+</script>
+{% endblock %}

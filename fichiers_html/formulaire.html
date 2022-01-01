@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div>
+    <div>
+        <h4>Formulaire de recherche</h4>
+        <p>Les resultats vous seront envoyés par email !</p>
+        <hr>
+    </div>
+
+    <form action="{% url 'webscraper:envoiMail' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ formulaire.as_p }}
+            <button type="submit" class="button btn btn-warning"> Valider et envoyer par Email</button>
+        </div>
+    </form>
+
+</div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

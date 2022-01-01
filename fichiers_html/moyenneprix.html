@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th scope="col">MARQUE</th>
+            <th scope="col">VILLE</th>
+            <th scope="col">PRIX MOYEN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Contenu du tableau -->
+      </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    function getProduits() {
+        $.getJSON("{% url 'webscraper:getMoyennePrix' %}", (response) => {
+            $(".table > tbody").empty()
+            response.forEach((element) => {
+                $(".table > tbody").append(`
+                    <tr>
+                        <td>${element.marque}</td>
+                        <td>${element.ville}</td>
+                        <td>${element.prixmoyen} DH</td>
+                    </tr>
+                `);
+            });
+        })
+    }
+    getProduits();
+    setInterval(()=>{
+        getProduits();
+    }, 300000);
+</script>
+{% endblock %}
