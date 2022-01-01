@@ -35,7 +35,6 @@ class scrapingClass:
             num_page_actuelle = num_page_suivante
             num_page_suivante = int(url_page_suivante.split("pge=")[-1])
 
-            print("Page actuelle == ", num_page_actuelle)
             time.sleep(300)
 
         self._browser.quit()
@@ -57,11 +56,10 @@ class scrapingClass:
 
             # Methode d'insertion dans la bd
             if titre and image and ville and prix and date_pub:
-                self.insertDonnees(titre=titre, image=image, ville=ville, prix=prix, date_pub=date_pub)
-                print("Data saved !")
+                self.insertData(titre=titre, image=image, ville=ville, prix=prix, date_pub=date_pub)
         return
 
-    def insertDonnees(self, image=None, titre=None, prix=None, ville=None, date_pub=None):
+    def insertData(self, image=None, titre=None, prix=None, ville=None, date_pub=None):
         """ En registrement des donnees dans la BD via l'ORM de Django (Model) """
         produit = Produit()
         produit.marque = str(titre).split()[0]
@@ -70,7 +68,6 @@ class scrapingClass:
         produit.prix = float("".join(prix.replace('DH', '').split()))
         produit.ville = ville
         produit.date_pub = self.dateParser(date_pub)
-        print(produit.date_pub)
 
         # insertion dans la BD
         try:
@@ -99,12 +96,13 @@ class scrapingClass:
     def getValue(self, element, by=None, by_value=""):
         """ methode permettant de recuperer la valeur en text d'un element html sans erreur"""
         try:
-            if by == "CN":
-                return element.find_element(By.CLASS_NAME, by_value).text
-            if by == "CS":
-                return element.find_element(By.CSS_SELECTOR, by_value).text
-            if by == "TN":
-                return element.find_element(By.TAG_NAME, by_value).text
+            match by:
+                case "CN":
+                    return element.find_element(By.CLASS_NAME, by_value).text
+                case "CS":
+                    return element.find_element(By.CSS_SELECTOR, by_value).text
+                case "TN":
+                    return element.find_element(By.TAG_NAME, by_value).text
 
         except NoSuchElementException as ex:
             return ""
@@ -112,12 +110,13 @@ class scrapingClass:
     def getAttribut(self, element, by=None, by_value="", attrib=""):
         """ methode permettant de recuperer la valeur en text d'un element html sans erreur"""
         try:
-            if by == "CN":
-                return element.find_element(By.CLASS_NAME, by_value).get_attribute(attrib)
-            if by == "CS":
-                return element.find_element(By.CSS_SELECTOR, by_value).get_attribute(attrib)
-            if by == "TN":
-                return element.find_element(By.TAG_NAME, by_value).get_attribute(attrib)
+            match by_value:
+                case "CN":
+                    return element.find_element(By.CLASS_NAME, by_value).get_attribute(attrib)
+                case "CS":
+                    return element.find_element(By.CSS_SELECTOR, by_value).get_attribute(attrib)
+                case "TN":
+                    return element.find_element(By.TAG_NAME, by_value).get_attribute(attrib)
 
         except NoSuchElementException as ex:
             return ""

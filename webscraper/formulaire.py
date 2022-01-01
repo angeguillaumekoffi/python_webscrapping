@@ -11,5 +11,5 @@ class FormulaireSaisie(forms.Form):
     prix_max = forms.IntegerField(label='Prix maximum')
     date_debut = forms.DateField(label='Date de debut', widget=forms.DateInput())
     date_fin = forms.DateField(label='Date de fin', widget=forms.DateInput())
-    email = forms.EmailField(label='Prix minimum')
+    email = forms.EmailField(label=' your email ')
 

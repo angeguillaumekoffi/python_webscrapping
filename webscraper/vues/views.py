@@ -10,7 +10,7 @@ import csv, json
 from ..scraperthreading.scraperthread import scraperthreadRunner
 from ..models import Produit
 from ..formulaire import FormulaireSaisie
-
+import codecs
 
 # Create your views here.
 def pageAccueil(request):
@@ -68,20 +68,21 @@ def envoiMail(request):
             recipient_list=[str(email)],
             fail_silently=False,
         )
-        messages.SUCCESS(request, "Email bien envoyé !")
+        messages.success(request, "Email bien envoyé !")
         return redirect("webscraper:pageRecherche")
     else:
         messages.ERROR(request, "Veuillez reésayer !")
         return redirect("webscraper:pageRecherche")
 
 def renderTocsv(request):
-    response = HttpResponse(content_type='text/csv')
+    response = HttpResponse(content_type='text/csv, charset=utf-8-sig')
     writer = csv.writer(response)
     writer.writerow(['ID', 'MARQUE', 'TITRE', 'PRIX', 'VILLE', 'DATE'])
 
     for element in Produit.objects.all().values_list("id", "marque", "titre", "prix", "ville", "date_pub"):
         writer.writerow(element)
 
+    response.write(codecs.BOM_UTF8)
     response['Content-Disposition'] = 'attachment; filename="liste_des_produits.csv"'
     return response
 
