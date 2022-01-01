@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table{
+            width: 100%;
+        }
+        table > tr > td {
+            height: 25px;
+            font-size: 14px;
+        }
+        table > tr > th {
+            height: 30px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        p > h1 {
+            font-size: 16px;
+            font-weight: bold;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <p><h1>LISTE DES PRODUITS RECHERCHES </h1></p>
+    <hr>
+    <div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>MARQUE</th>
+                <th>PRIX</th>
+                <th>VILLE</th>
+                <th>DATE</th>
+                <th>IMAGE</th>
+            </tr>
+            {% for element in liste_produits %}
+            <tr>
+                <td>{{ element.id }}</td>
+                <td>{{ element.marque }}</td>
+                <td>{{ element.prix }}</td>
+                <td>{{ element.ville }}</td>
+                <td>{{ element.date_pub }}</td>
+                <td><img src="{{ element.image | safe }}" alt=""></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <hr>
+    <p>Email from webscraper</p>
+</body>
+</html>
