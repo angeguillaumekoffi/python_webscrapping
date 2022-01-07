@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap5',
     'webscraper',
 ]
 
@@ -124,6 +125,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Parametrage du compte Email par defaut
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'anassna92@gmail.com'
-EMAIL_HOST_PASSWORD = 'anass123HH'
+EMAIL_HOST_USER = 'angekoffiguillaume@gmail.com'
+EMAIL_HOST_PASSWORD = '00022501389440'
 EMAIL_USE_TLS = True

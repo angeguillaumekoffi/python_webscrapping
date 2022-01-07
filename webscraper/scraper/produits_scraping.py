@@ -7,6 +7,7 @@ from ..models import Produit
 
 class scrapingClass:
     def __init__(self, url):
+        """Le constructeur par defaut"""
         self._url = url
         self.liste_conteneur_li = []
         self._options = webdriver.ChromeOptions()
@@ -14,13 +15,14 @@ class scrapingClass:
         self._browser = webdriver.Chrome(ChromeDriverManager().install(), options=self._options)
         return
 
-    def startscraper(self):
+    def scraper_worker(self):
+        """ Le processus qui sera injecté en fond via le threading"""
         self._browser.get(url=str(self._url))
 
         # Bouton suivant de pagination
         btn_suivant = self._browser.find_element(By.XPATH, "//li[@class='next']/a")
 
-        self.scrap(browser=self._browser)
+        self.scrap_data(browser=self._browser)
 
         url_page_suivante = btn_suivant.get_attribute("href")
         num_page_suivante = int(url_page_suivante.split("pge=")[-1])
@@ -28,7 +30,7 @@ class scrapingClass:
 
         while (num_page_actuelle < num_page_suivante):
             self._browser.get(url=url_page_suivante)
-            self.scrap(browser=self._browser)
+            self.scrap_data(browser=self._browser)
 
             # initialisation des elements de la page suivante
             url_page_suivante = self._browser.find_element(By.XPATH, "//li[@class='next']/a").get_attribute("href")
@@ -41,7 +43,7 @@ class scrapingClass:
         self._browser.quit()
         return
 
-    def scrap(self, browser):
+    def scrap_data(self, browser):
         """ Methode permettant de recuperer les données à partir du code html et les sauvegarder """
 
         liste_ul = browser.find_element(By.CLASS_NAME, 'cars-list')
@@ -64,21 +66,22 @@ class scrapingClass:
     def insertDonnees(self, image=None, titre=None, prix=None, ville=None, date_pub=None):
         """ En registrement des donnees dans la BD via l'ORM de Django (Model) """
         produit = Produit()
-        produit.marque = str(titre).split()[0]
+        produit.marque = str(titre).split()[0].capitalize()
         produit.image = image
         produit.titre = titre
         produit.prix = float("".join(prix.replace('DH', '').split()))
         produit.ville = ville
         produit.date_pub = self.dateParser(date_pub)
-        print(produit.date_pub)
 
         # insertion dans la BD
         try:
-            return produit.save()
+            return produit.enregistre_to_DB()
         except:
             return
 
     def dateParser(self, datestring):
+        """Ici, nous faisons des converrtiion de date car les dates récupérées ne sont pas toutes au bon format enregistrable en Datetime"""
+
         if datestring == "Ajourd'hui":
             return datetime.datetime.now()
         elif datestring == "Hier":
@@ -89,10 +92,8 @@ class scrapingClass:
                 datestring = datestring.replace("\n", " ").split()
                 if len(datestring) < 4:
                     datestring.insert(2, str(datetime.date.today().year))
-                datestring = " ".join(datestring)
 
-                date = datetime.datetime.strptime(datestring, '%d %b %Y %I:%M')
-                return date
+                return datetime.datetime.strptime(" ".join(datestring), '%d %b %Y %I:%M')
             except:
                 return datetime.datetime.now()
 

@@ -1,7 +1,11 @@
 {% extends 'index.html' %}
+{% load bootstrap5 %}
+
 
 {% block content %}
 <div>
+    <div style="height: 65px"></div>
+    <hr>
     <div>
         <h4>Formulaire de recherche</h4>
         <p>Les resultats vous seront envoyés par email !</p>
@@ -11,8 +15,8 @@
     <form action="{% url 'webscraper:envoiMail' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
-            {{ formulaire.as_p }}
-            <button type="submit" class="button btn btn-warning"> Valider et envoyer par Email</button>
+            {% bootstrap_form  formulaire layout='horizontal' %}
+            <button type="submit" class="button btn btn-primary"> Valider et envoyer par Email</button>
         </div>
     </form>
 
@@ -20,4 +24,14 @@
 {% endblock %}
 
 {% block js %}
+    <script>
+      $(function () {
+        $("#datetimepicker1").datepicker({
+          format: 'DD/MM/YYYY',
+        });
+        $("#datetimepicker2").datepicker({
+          format: 'DD/MM/YYYY',
+        });
+      });
+    </script>
 {% endblock %}

@@ -2,7 +2,9 @@
 
 {% block content %}
 <div>
-    <table class="table table-striped">
+    <div style="height: 65px"></div>
+    <hr>
+    <table id="table" class="display" width="100%">
       <thead>
         <tr>
             <th scope="col">MARQUE</th>
@@ -19,23 +21,36 @@
 
 {% block js %}
 <script>
+    first_init = true;
     function getProduits() {
-        $.getJSON("{% url 'webscraper:getMoyennePrix' %}", (response) => {
-            $(".table > tbody").empty()
-            response.forEach((element) => {
-                $(".table > tbody").append(`
-                    <tr>
-                        <td>${element.marque}</td>
-                        <td>${element.ville}</td>
-                        <td>${element.prixmoyen} DH</td>
-                    </tr>
-                `);
-            });
-        })
+        if(first_init){
+                tableau_liste = $('#table').DataTable({
+                    language: {
+                        "url": "//cdn.datatables.net/plug-ins/1.11.2/i18n/fr_fr.json"
+                    },
+                    processing: false,
+                    serverSide: false,
+                    ajax: "{% url 'webscraper:getMoyennePrix' %}",
+                    columns: [
+                        { data: "marque" },
+                        { data: "ville" },
+                        { data: "prixmoyen" }
+                    ]
+                });
+                first_init = false;
+            }else{
+                if (tableau_liste) tableau_liste.clear();
+                tableau_liste.ajax.url( "{% url 'webscraper:getMoyennePrix' %}" ).load()
+            }
     }
-    getProduits();
-    setInterval(()=>{
+    $(document).ready(function() {
         getProduits();
-    }, 300000);
+
+        setInterval(()=>{
+            getProduits();
+        }, 300000);
+
+        //$('.table').DataTable();
+    } );
 </script>
 {% endblock %}
