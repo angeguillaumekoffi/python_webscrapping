@@ -1,4 +1,4 @@
-# projet_fin_mod_python
+# Projet de fin de module : Python 
 Projet de fin de module : Python 
 
 Objectifs de l’application :
