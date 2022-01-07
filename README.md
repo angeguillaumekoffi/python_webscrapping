@@ -1,4 +1,4 @@
-# Projet de fin de module : Python 
+# Projet de webscraping : Python 
 Projet de fin de module : Python 
 
 Objectifs de l’application :
