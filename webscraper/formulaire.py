@@ -3,7 +3,7 @@ from .models import Produit
 
 class FormulaireSaisie(forms.Form):
     liste_produits = []
-    for p in Produit.objects.all().values("ville").distinct().order_by("ville"):
+    for p in []:     #Produit.objects.all().values("ville").distinct().order_by("ville"):
         liste_produits.append((p["ville"], p["ville"]))
 
     ville = forms.ChoiceField(choices=liste_produits)

@@ -75,12 +75,13 @@ WSGI_APPLICATION = 'projet_fin_mod_python.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'dbase.sqlite3',
     }
 }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+#DATABASES['default'].update(db_from_env)
+
 
 
 # Password validation
