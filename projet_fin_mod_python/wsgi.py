@@ -22,6 +22,7 @@ from projet_fin_mod_python import settings
 sys.path.append(f"{os.path.join(settings.BASE_DIR, 'fichiers_statique')}")
 
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'test_getsolupro.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'projet_fin_mod_python.settings'
 
 application = get_wsgi_application()
+
