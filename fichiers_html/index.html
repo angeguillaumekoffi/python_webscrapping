@@ -9,6 +9,31 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{% static 'index.css' %}">
     <title>websacraper project</title>
+
+    <style>
+        .navbar {
+            position: fixed;
+            width: 100%;
+            height: 60px;
+            padding: 10px;
+            background-color: #ffea02;
+            border-bottom: solid 1px rgba(0, 0, 0, 0.93);
+            box-shadow: .1px .1px 4px .1px rgba(40, 40, 40, 0.92);
+            z-index: 10000;
+            justify-content: space-between;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: black !important;
+            z-index: 2000;
+        }
+
+        .nav-link > span{
+            font-weight: bolder;
+            margin: 0 2px 0 2px;
+            border-bottom: solid 2px black;
+        }
+    </style>
 </head>
 <body>
     {% block header %}
