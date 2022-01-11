@@ -60,7 +60,6 @@ class scrapingClass:
             # Methode d'insertion dans la bd
             if titre and image and ville and prix and date_pub:
                 self.insertDonnees(titre=titre, image=image, ville=ville, prix=prix, date_pub=date_pub)
-                print("Data saved !")
         return
 
     def insertDonnees(self, image=None, titre=None, prix=None, ville=None, date_pub=None):
