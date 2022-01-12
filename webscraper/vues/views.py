@@ -1,5 +1,5 @@
 from datetime import datetime
-from django.conf.global_settings import EMAIL_HOST_USER
+from django.conf.global_settings import EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
@@ -14,6 +14,8 @@ from ..formulaire import FormulaireSaisie
 def pageAccueil(request):
     """ Vue qui renvoi la page d'accueil en html"""
     scraperthreadRunner()
+    print("EMAIL_HOST_USER : ", EMAIL_HOST_USER)
+    print("EMAIL_HOST_PASSWORD : ", EMAIL_HOST_PASSWORD)
     return render(request, 'accueil.html')
 
 
