@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from django.conf.global_settings import EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 from django.contrib import messages
@@ -63,10 +64,12 @@ def envoiMail(request):
 
         html_message = render_to_string('html_email_body.html', {'liste_produits': liste_produits})
         send_mail(
+            auth_user=os.environ.get("EMAIL_HOST_USER"),
+            auth_password=os.environ.get("EMAIL_HOST_PASSWORD"),
             subject='Produits from scraper',
             message="",
             html_message=html_message,
-            from_email=EMAIL_HOST_USER,
+            from_email=os.environ.get("EMAIL_HOST_USER"),
             recipient_list=[str(email)],
             fail_silently=False,
         )

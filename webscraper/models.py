@@ -53,8 +53,7 @@ class Produit(models.Model):
         writer = csv.writer(response)
         writer.writerow(['ID', 'MARQUE', 'TITRE', 'PRIX', 'VILLE', 'DATE'])
 
-        values_list = "id", "marque", "titre", "prix", "ville", "date_pub"
-        for element in Produit.objects.all().values_list(values_list):
+        for element in Produit.objects.all().values_list("id", "marque", "titre", "prix", "ville", "date_pub"):
             writer.writerow(element)
 
         response['Content-Disposition'] = 'attachment; filename="liste_des_produits.csv"'
