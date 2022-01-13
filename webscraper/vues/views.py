@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 from django.conf.global_settings import EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 from django.contrib import messages
@@ -14,9 +13,8 @@ from ..formulaire import FormulaireSaisie
 # Create your views here.
 def pageAccueil(request):
     """ Vue qui renvoi la page d'accueil en html"""
-    scraperthreadRunner()
-    print("EMAIL_HOST_USER : ", EMAIL_HOST_USER)
-    print("EMAIL_HOST_PASSWORD : ", EMAIL_HOST_PASSWORD)
+
+    scraperthreadRunner()       # Démarrage du thread pour le scraping en tâche de fond
     return render(request, 'accueil.html')
 
 
@@ -28,7 +26,7 @@ def pageMoyennePrix(request):
 def pageRecherche(request):
     """ Vue qui renvoi la page de recherche en html"""
 
-    formulaire = FormulaireSaisie()
+    formulaire = FormulaireSaisie()     # Initialisation du formulaire
     return render(request, 'formulaire.html', {"formulaire" : formulaire})
 
 
@@ -64,12 +62,12 @@ def envoiMail(request):
 
         html_message = render_to_string('html_email_body.html', {'liste_produits': liste_produits})
         send_mail(
-            auth_user=os.environ.get("EMAIL_HOST_USER"),
-            auth_password=os.environ.get("EMAIL_HOST_PASSWORD"),
             subject='Produits from scraper',
             message="",
             html_message=html_message,
-            from_email=os.environ.get("EMAIL_HOST_USER"),
+            from_email=EMAIL_HOST_USER,
+            auth_user=EMAIL_HOST_USER,
+            auth_password=EMAIL_HOST_PASSWORD,
             recipient_list=[str(email)],
             fail_silently=False,
         )

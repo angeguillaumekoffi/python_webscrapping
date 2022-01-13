@@ -17,9 +17,11 @@ class Produit(models.Model):
         return self.titre
 
     def enregistre_to_DB(self):
+        """Methode qui enregistre l'instance de la classe dans la base de données (Création) """
         return self.save()
 
     def get_all_Json(self):
+        """Methode qui renvoi toutes les données au format json """
         produits_json = {"data": []}
         for d in json.loads(serialize("json", Produit.objects.all().order_by("id"))):
             d["fields"]["id"] = d["pk"]
@@ -30,6 +32,7 @@ class Produit(models.Model):
         return json.dumps(produits_json)
 
     def get_moyenne_to_json(self):
+        """Methode qui renvoi la moyenne des prix par marque et par ville """
         produits = list()
         with connection.cursor() as cursor:
             req_sql = f"select marque, ville, avg(prix) as prixmoyen from {Produit._meta.db_table} group by ville, marque"
@@ -50,6 +53,7 @@ class Produit(models.Model):
         return json.dumps(produits_dic)
 
     def write_to_csv(self, response):
+        """Methode qui génère les données sous format csv"""
         writer = csv.writer(response)
         writer.writerow(['ID', 'MARQUE', 'TITRE', 'PRIX', 'VILLE', 'DATE'])
 
