@@ -26,8 +26,12 @@
 <body>
     <p><h1>LISTE DES PRODUITS RECHERCHES </h1></p>
     <hr>
+    <p>Ville : {{ ville }}</p>
+    <p>Intervalle de dates : du {{ date_debut }} au {{ date_fin }}</p>
+    <p>Intervalle de prix : Compris entre {{ prix_min }}DH et {{ prix_max }}DH</p>
+    <hr>
     <div>
-        <table class="table table-striped">
+        <table class="table table-bordered table-striped">
             <tr>
                 <th>ID</th>
                 <th>MARQUE</th>

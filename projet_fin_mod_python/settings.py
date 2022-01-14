@@ -100,6 +100,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Parametrage du compte Email par defaut
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "scraperdjango@gmail.com"
-EMAIL_HOST_PASSWORD = "password@2022"
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True

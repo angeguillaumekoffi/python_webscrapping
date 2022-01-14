@@ -60,14 +60,15 @@ def envoiMail(request):
 
         liste_produits = Produit.objects.filter(prix__gte=prix_min, prix__lte=prix_max, date_pub__gte=date_debut, date_pub__lte=date_fin, ville=ville)
 
-        html_message = render_to_string('html_email_body.html', {'liste_produits': liste_produits})
+        html_message = render_to_string(
+            'html_email_body.html',
+            {'liste_produits': liste_produits, 'date_debut':date_debut, 'date_fin':date_fin, 'ville':ville, 'prix_min':prix_min, 'prix_max':prix_max}
+        )
         send_mail(
             subject='Produits from scraper',
             message="",
             html_message=html_message,
             from_email=EMAIL_HOST_USER,
-            auth_user=EMAIL_HOST_USER,
-            auth_password=EMAIL_HOST_PASSWORD,
             recipient_list=[str(email)],
             fail_silently=False,
         )

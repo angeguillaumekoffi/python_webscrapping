@@ -26,12 +26,8 @@
 {% block js %}
     <script>
       $(function () {
-        $("#datetimepicker1").datepicker({
-          format: 'DD/MM/YYYY',
-        });
-        $("#datetimepicker2").datepicker({
-          format: 'DD/MM/YYYY',
-        });
+        $("#datetimepicker1").datepicker({ dateFormat: 'dd/mm/yy' });
+        $("#datetimepicker2").datepicker({ dateFormat: 'dd/mm/yy' });
       });
     </script>
 {% endblock %}
