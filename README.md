@@ -8,10 +8,12 @@ Objectifs de l’application :
 
 • Comparer les prix et la disponibilité des produits dans chaque ville
 
-• Filtrer les produits selon les critères de l’utilisateur
-Consignes
+• Filtre sur les produits selon les critères de l’utilisateur
 
-• Les sources de données : les sites d’annonces les plus connus comme « avito », « marocannonces »
+
+Fonctionnalité
+
+• Les sources de données : les sites d’annonces les plus connus comme « avito » et « marocannonces »
 
 • Un scraper qui récupère les données d’une manière structurée et les mettre dans une base de données de votre choix chaque 5 minutes sans doublons (utiliser un ORM)
 
@@ -25,7 +27,7 @@ Consignes
 
 • Une deuxième interface graphique qui contient la moyenne des prix de chaque type de smartphone dans chaque ville (utiliser un tableau croisé dynamique).
 
-• Créer une interface qui permet de choisir l’intervalle de prix, la ville et l’intervalle de date. Ensuite, envoi par email les produits qui répondent aux critères cités sur l’interface.
+• Une interface qui permet de choisir l’intervalle de prix, la ville et l’intervalle de date. Ensuite, envoi par email les produits qui répondent aux critères cités sur l’interface.
 
 • La programmation orientée objet est obligatoire.
 
@@ -33,11 +35,3 @@ Consignes
 
 • La conception et la disposition des interfaces graphiques est laissée à votre choix
 
-Critères :
-• Propreté du code
-
-• Ergonomie des interfaces
-
-• Efficacité du programme
-
-• Respect des consignes ci-dessus
