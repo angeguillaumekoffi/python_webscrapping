@@ -1,4 +1,4 @@
-# Projet de webscraping : Python 
+# Projet de webscraping avec Python et Django 
 
 Objectifs de l’application :
 
