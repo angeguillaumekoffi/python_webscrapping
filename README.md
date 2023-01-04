@@ -1,7 +1,7 @@
 # Projet de webscraping : Python 
-Projet de fin de module : Python 
 
 Objectifs de l’application :
+
 • Analyser le marché de vente des smartphones
 
 • Savoir la région qui propose des prix minimums et les prix maximums
@@ -11,7 +11,7 @@ Objectifs de l’application :
 • Filtre sur les produits selon les critères de l’utilisateur
 
 
-Fonctionnalité
+Fonctionnalités:
 
 • Les sources de données : les sites d’annonces les plus connus comme « avito » et « marocannonces »
 
@@ -28,10 +28,4 @@ Fonctionnalité
 • Une deuxième interface graphique qui contient la moyenne des prix de chaque type de smartphone dans chaque ville (utiliser un tableau croisé dynamique).
 
 • Une interface qui permet de choisir l’intervalle de prix, la ville et l’intervalle de date. Ensuite, envoi par email les produits qui répondent aux critères cités sur l’interface.
-
-• La programmation orientée objet est obligatoire.
-
-• Développer le projet en plusieurs packages
-
-• La conception et la disposition des interfaces graphiques est laissée à votre choix
 
